@@ -5,10 +5,10 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch: # Allows manual trigger for production deployment
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 jobs:
   security-scans:
@@ -98,10 +98,10 @@ jobs:
           retention-days: 30
 
   deploy-development:
-    name: Deploy to Development (Vercel Preview)
+    name: Deploy to Development (Vercel Dev Project)
     runs-on: ubuntu-latest
     needs: [ security-scans, unit-tests, e2e-tests ]
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -116,18 +116,24 @@ jobs:
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_DEV }}
 
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_DEV }}
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_DEV }}
 
   deploy-production:
-    name: Deploy to Production (Vercel Prod)
+    name: Deploy to Production (Vercel Prod Project - Manual)
     runs-on: ubuntu-latest
     needs: [ security-scans, unit-tests, e2e-tests ]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -142,9 +148,15 @@ jobs:
 
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PROD }}
 
       - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PROD }}
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PROD }}
