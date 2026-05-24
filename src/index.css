@@ -1,0 +1,36 @@
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background-color: #0E0E0E;
+}
+
+/* Styliser la barre de défilement pour tous les éléments avec la classe .custom-scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px; /* Largeur de la barre de défilement */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1a202c; /* Couleur du fond de la barre de défilement */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4a5568; /* Couleur de la barre de défilement elle-même */
+  border-radius: 20px; /* Arrondir les coins de la barre de défilement */
+  border: 3px solid #1a202c; /* Couleur de la bordure autour de la barre de défilement */
+}
+
+/* Styles pour le menu plein écran */
+@media (max-width: 1024px) {
+  header nav ul {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  header nav ul li {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}

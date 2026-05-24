@@ -1,0 +1,94 @@
+name: Secure CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security-scans:
+    name: Security Scans (SAST, SCA, Secrets)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 1. Gitleaks Secrets Detection
+      - name: Gitleaks Secrets Scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 2. Semgrep Static Application Security Testing (SAST)
+      - name: Semgrep SAST Scan
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: p/react
+
+      # 3. OWASP Dependency-Check (SCA)
+      - name: OWASP Dependency-Check Scan
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'Secure React Pipeline'
+          path: '.'
+          format: 'HTML'
+          out: 'reports'
+        # We can upload report as artifact
+      - name: Upload Security Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: reports/
+          if-no-files-found: ignore
+
+  unit-tests:
+    name: Jest Unit & Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Jest Tests
+        run: npm run test:ci
+
+  e2e-tests:
+    name: Playwright E2E Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers & Deps
+        run: npx playwright install --with-deps chromium
+
+      - name: Run E2E Tests
+        run: npm run test:e2e
+
+      - name: Upload E2E HTML Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
