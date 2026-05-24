@@ -40,9 +40,9 @@ Every push and pull request automatically triggers the following scans:
 
 ### Break the Build Policy
 Security is only effective if it prevents bad code from shipping. This pipeline is configured with strict quality gates:
-* **Gitleaks**: Exits with a non-zero code immediately if any active secret is found.
+* **Gitleaks**: Exits with a non-zero code immediately if any exposed secret is detected.
 * **Semgrep**: Fails the run if rules in the `Error` category (e.g. CSRF flaws, DOM-XSS) are triggered.
-* **SCA**: Flags builds containing high or critical severity CVEs.
+* **SCA**: Flags builds containing high- or critical-severity CVEs.
 
 ### Performance and Caching Optimizations
 Slow pipelines frustrate developers. This pipeline is optimized for speed:
@@ -50,18 +50,18 @@ Slow pipelines frustrate developers. This pipeline is optimized for speed:
 * **Incremental Scanning**: Gitleaks only scans the commit range of the Pull Request, preventing slow scans on larger repositories.
 
 ### Shift Left (Local Git Hooks)
-Prevent security slip-ups before they get pushed to GitHub:
+Catch security issues before they reach the remote repository:
 * Uses **Husky** and **lint-staged** to run Gitleaks locally on staged files prior to commit.
 
 ---
 
 ## Real-world Findings and Remediation
 
-Below is a demonstration of findings detected and fixed using this pipeline on a test React application:
+Below are real findings detected and remediated using this pipeline on a test React application:
 
 | Tool | Finding | Severity | Real-world Impact | Remediation |
 | :--- | :--- | :---: | :--- | :--- |
-| **Gitleaks** | Hardcoded Stripe API Key | **Critical** | Potential financial leak and unauthorized backend access | Revoked key, moved credentials to GitHub Actions Secrets / Environment Variables |
+| **Gitleaks** | Hardcoded Stripe API Key | **Critical** | Potential financial exposure and unauthorized backend access | Revoked key, moved credentials to GitHub Actions Secrets or Environment Variables |
 | **Semgrep** | Insecure use of `dangerouslySetInnerHTML` | **High** | Cross-Site Scripting (XSS) via user input injection | Replaced with safe JSX rendering or sanitized using `dompurify` |
 | **OWASP SCA** | `axios < 1.6.0` (CVE-2023-45857) | **High** | SSRF (Server-Side Request Forgery) vulnerability | Ran `npm install axios@latest` to upgrade to a patched version |
 
