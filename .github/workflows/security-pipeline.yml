@@ -48,7 +48,7 @@ jobs:
           path: '.'
           format: 'HTML'
           out: 'reports'
-          args: --data ${{ github.workspace }}/dependency-check-data
+          args: --data /github/workspace/dependency-check-data
 
       - name: Upload Security Reports
         uses: actions/upload-artifact@v4
