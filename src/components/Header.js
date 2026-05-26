@@ -41,12 +41,12 @@ const Header = () => {
             <ul className="flex lg:flex-row gap-7 text-md">
               <li className="my-1 lg:my-0 w-[max-content]">
                 <Link to="/about" className="text-white hover:text-gray-300">
-                  A PROPOS
+                  ABOUT
                 </Link>
               </li>
               <li className="my-1 lg:my-0">
-                <Link to="/projets" className="text-white hover:text-gray-300">
-                  PROJETS
+                <Link to="/projects" className="text-white hover:text-gray-300">
+                  PROJECTS
                 </Link>
               </li>
               <li className="my-1 lg:my-0">

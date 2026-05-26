@@ -4,8 +4,8 @@ import AboutMePage from './AboutMePage';
 
 test('renders AboutMePage with career history and skills', () => {
   render(<AboutMePage />);
-  expect(screen.getByText(/Je m'appelle Samuel Dorismond/i)).toBeInTheDocument();
-  expect(screen.getByText(/Développement Front-End/i)).toBeInTheDocument();
-  expect(screen.getByText(/Développement Back-End/i)).toBeInTheDocument();
+  expect(screen.getByText(/My name is Samuel Dorismond/i)).toBeInTheDocument();
+  expect(screen.getByText(/Front-End Development/i)).toBeInTheDocument();
+  expect(screen.getByText(/Back-End Development/i)).toBeInTheDocument();
   expect(screen.getByText(/Design & UX\/UI/i)).toBeInTheDocument();
 });

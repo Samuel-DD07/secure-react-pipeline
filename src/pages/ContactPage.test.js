@@ -4,7 +4,7 @@ import ContactPage from './ContactPage';
 
 test('renders ContactPage with email and linkedin links', () => {
   render(<ContactPage />);
-  expect(screen.getByText(/Contactez-moi/i)).toBeInTheDocument();
+  expect(screen.getByText(/Contact Me/i)).toBeInTheDocument();
   
   const emailLink = screen.getByText(/samuel.dorismond@yahoo.com/i);
   expect(emailLink).toBeInTheDocument();

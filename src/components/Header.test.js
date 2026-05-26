@@ -14,8 +14,8 @@ test('renders Header and handles navigation links', () => {
   expect(screen.getByText('DORISMOND')).toBeInTheDocument();
   
   // Verify navigation links are present
-  expect(screen.getByText('A PROPOS')).toBeInTheDocument();
-  expect(screen.getByText('PROJETS')).toBeInTheDocument();
+  expect(screen.getByText('ABOUT')).toBeInTheDocument();
+  expect(screen.getByText('PROJECTS')).toBeInTheDocument();
   expect(screen.getByText('CONTACT')).toBeInTheDocument();
 });
 

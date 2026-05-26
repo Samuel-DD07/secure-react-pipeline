@@ -15,11 +15,11 @@ const PortfolioItem = ({
       <div className="p-4 md:p-10">
         <h3 className="text-xl md:text-3xl font-bold mb-10">{title}</h3>
         <h5 className="text-xl font-semibold text-gray-300 mb-4">
-          Description :
+          Description:
         </h5>
         <p className="text-gray-300 text-base mb-10">{description}</p>
         <h5 className="text-xl font-semibold text-gray-300 mb-4 mr-2">
-          Hard Skills :
+          Hard Skills:
         </h5>
         <div className="flex flex-wrap mb-5">
           {tags.map((tag, index) => (
@@ -32,7 +32,7 @@ const PortfolioItem = ({
           ))}
         </div>
         <h5 className="text-xl font-semibold text-gray-300 mb-4 mr-2">
-          Soft Skills :
+          Soft Skills:
         </h5>
         <div className="flex flex-wrap mb-5">
           {softSkills.map((softSkill, index) => (
@@ -47,7 +47,7 @@ const PortfolioItem = ({
         {images?.length > 0 && (
           <div className="flex mt-10 flex-col">
             <h5 className="text-xl font-semibold text-gray-300 mb-4 mr-2">
-              Images et Rendus :
+              Images and Renderings:
             </h5>
             <div className="flex flex-wrap gap-3">
               {images?.map((image, index) => (
@@ -57,9 +57,9 @@ const PortfolioItem = ({
                   onClick={() => window.open(image, "_blank")}
                 >
                   <img
-                    src={image}
-                    alt={title}
-                    className="object-cover rounded-lg w-full h-full"
+                     src={image}
+                     alt={title}
+                     className="object-cover rounded-lg w-full h-full"
                   />
                 </div>
               ))}
@@ -73,7 +73,7 @@ const PortfolioItem = ({
             rel="noreferrer"
             className="text-md font-semibold text-gray-100 hover:text-white bg-gray-700 px-4 py-3 rounded"
           >
-            Voir le projet
+            View Project
           </a>
         </div>
       </div>

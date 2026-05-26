@@ -19,7 +19,7 @@ const ProfileCard = () => {
     >
       <h3 className="font-bold text-2xl mb-2">Samuel Dorismond</h3>
       <p className="text-lg text-center">
-        Etudiant et Responsable en développement web
+        Student & Web Development Lead
       </p>
       <div className="flex mt-4">
         <a href="mailto:samuel.dorismond@yahoo.com" className="text-white mx-2">

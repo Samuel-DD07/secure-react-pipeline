@@ -26,7 +26,7 @@ test('renders PortfolioItem with details and handles image clicks', () => {
   expect(screen.getByText('Adaptability')).toBeInTheDocument();
 
   // Check external project link href
-  const projectLink = screen.getByText('Voir le projet');
+  const projectLink = screen.getByText('View Project');
   expect(projectLink).toHaveAttribute('href', 'https://gamma-url.com');
 
   // Check images are rendered

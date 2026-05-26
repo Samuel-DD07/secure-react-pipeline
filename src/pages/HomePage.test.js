@@ -10,5 +10,5 @@ test('renders HomePage with main sections', () => {
     </MemoryRouter>
   );
   expect(screen.getAllByText(/Samuel Dorismond/i).length).toBeGreaterThan(0);
-  expect(screen.getByText(/Voir mes projets/i)).toBeInTheDocument();
+  expect(screen.getByText(/View my projects/i)).toBeInTheDocument();
 });

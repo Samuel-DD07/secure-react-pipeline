@@ -11,28 +11,27 @@ const AboutMePage = () => {
           className="rounded-full w-52 h-52 mb-4 object-cover filter grayscale"
         />
         <h1 className="text-4xl font-bold mb-4">
-          Je m'appelle Samuel Dorismond.
+          My name is Samuel Dorismond.
         </h1>
       </div>
       <div className="flex flex-col items-center justify-center">
         <div className="mb-6 flex flex-col items-center">
-          <h3 className="text-2xl font-bold mb-2">Présentation :</h3>
+          <h3 className="text-2xl font-bold mb-2">Introduction:</h3>
           <p className="mb-2 bg-gray-800 p-4 rounded-lg">
-            J'ai 20 ans. Etudiant en 3ème année de B.U.T informatique en
-            alternance à l'Université Villetaneuse Sorbonne Paris Nord.
+            I am 20 years old. I am a 3rd year Computer Science student in a
+            work-study program at Villetaneuse Sorbonne Paris Nord University.
           </p>
           <p className="mb-2 bg-gray-800 p-4 rounded-lg">
-            Je suis passionné par le développement web et le design. J'aime
-            créer des sites web et des applications web.
+            I am passionate about web development and design. I enjoy
+            creating websites and web applications.
           </p>
           <p className="mb-2 bg-gray-800 p-4 rounded-lg">
-            Je suis également passionné par le design, j'aime créer des logos,
-            des affiches, des flyers, des cartes de visite, des bannières et des
-            illustrations.
+            I am also passionate about graphic design; I love creating logos,
+            posters, flyers, business cards, banners, and illustrations.
           </p>
           <p className="mb-2 bg-gray-800 p-4 rounded-lg">
-            De plus, je suis responsable de développement de la plateforme de
-            l'entreprise issho. Vous pouvez la visiter
+            Additionally, I am the lead developer for the company
+            issho Partners. You can visit it
             <a
               href="https://issho-partners.com"
               target="_blank"
@@ -40,32 +39,32 @@ const AboutMePage = () => {
               className="text-blue-500 hover:text-blue-600"
             >
               {" "}
-              ici
+              here
             </a>
             .
           </p>
         </div>
         <div className="flex flex-col items-center mb-6 justify-center">
-          <h3 className="text-2xl font-bold mb-10">Parcours :</h3>
+          <h3 className="text-2xl font-bold mb-10">Experience & Education:</h3>
           <div className="flex flex-row flex-wrap gap-3 my-2 justify-center">
             <p className="mb-2 bg-gray-800 p-4 rounded-lg lg:w-auto w-full">
-              2022 - En cours : <br />
-              <strong>Responsable du développement web</strong> <br />
-              dans l'entreprise issho.
+              2022 - Present: <br />
+              <strong>Lead Web Developer</strong> <br />
+              at issho Partners.
             </p>
             <p className="mb-2 bg-gray-800 p-4 rounded-lg lg:w-auto w-full">
-              2021 - En cours : <br />
-              <strong>B.U.T informatique en alternance</strong> <br />à
-              l'Université Villetaneuse Sorbonne Paris Nord.
+              2021 - Present: <br />
+              <strong>B.U.T. in Computer Science (Work-Study)</strong> <br />at
+              Villetaneuse Sorbonne Paris Nord University.
             </p>
             <p className="mb-2 bg-gray-800 p-4 rounded-lg lg:w-auto w-full">
-              2018 - 2021 : <br />
+              2018 - 2021: <br />
               <strong>
-                BAC GENERAL <br />
-                (Option Mathématique et Physique-Chimie)
+                General Baccalaureate <br />
+                (Mathematics & Physics-Chemistry Specialization)
               </strong>{" "}
               <br />
-              au lycée André Boulloche.
+              at André Boulloche High School.
             </p>
           </div>
         </div>
@@ -78,10 +77,10 @@ const AboutMePage = () => {
 const CompetencesSection = () => {
   return (
     <div className="flex flex-col items-center mb-6 justify-center">
-      <h3 className="text-2xl font-bold mb-10">Compétences :</h3>
+      <h3 className="text-2xl font-bold mb-10">Skills:</h3>
       <div className="flex flex-row flex-wrap gap-3 my-2 justify-center">
         <Category
-          title="Développement Front-End"
+          title="Front-End Development"
           skills={[
             "HTML",
             "CSS",
@@ -101,7 +100,7 @@ const CompetencesSection = () => {
           skills={["Figma", "Photoshop", "Illustrator", "Adobe XD"]}
         />
         <Category
-          title="Développement Back-End"
+          title="Back-End Development"
           skills={[
             "Node.js",
             "Express.js",
@@ -115,7 +114,7 @@ const CompetencesSection = () => {
           ]}
         />
         <Category
-          title="Environnement de travail"
+          title="Tools & Environment"
           skills={[
             "Git",
             "GitHub",

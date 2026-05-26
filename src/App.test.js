@@ -4,6 +4,6 @@ import App from './App';
 
 test('renders App and displays homepage welcome text', () => {
   render(<App />);
-  const mainTitle = screen.getByText(/Je suis Samuel Dorismond/i);
+  const mainTitle = screen.getByText(/I am Samuel Dorismond/i);
   expect(mainTitle).toBeInTheDocument();
 });

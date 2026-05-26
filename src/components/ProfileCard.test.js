@@ -6,7 +6,7 @@ test('renders ProfileCard with info and social links', () => {
   render(<ProfileCard />);
   
   expect(screen.getByText('Samuel Dorismond')).toBeInTheDocument();
-  expect(screen.getByText(/Etudiant et Responsable en développement web/i)).toBeInTheDocument();
+  expect(screen.getByText(/Student & Web Development Lead/i)).toBeInTheDocument();
   
   // Verify social links are configured correctly by matching their hrefs
   const links = screen.getAllByRole('link');

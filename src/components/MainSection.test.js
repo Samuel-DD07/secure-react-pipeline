@@ -10,7 +10,7 @@ test('renders MainSection welcome text and action links', () => {
     </MemoryRouter>
   );
   
-  expect(screen.getByText(/Je suis Samuel Dorismond/i)).toBeInTheDocument();
-  expect(screen.getByText(/Voir mes projets/i)).toBeInTheDocument();
-  expect(screen.getByText(/Me contacter/i)).toBeInTheDocument();
+  expect(screen.getByText(/I am Samuel Dorismond/i)).toBeInTheDocument();
+  expect(screen.getByText(/View my projects/i)).toBeInTheDocument();
+  expect(screen.getByText(/Contact me/i)).toBeInTheDocument();
 });
