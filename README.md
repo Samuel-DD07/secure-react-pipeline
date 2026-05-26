@@ -4,6 +4,11 @@ A fully automated security pipeline for React applications, integrated directly 
 
 This project showcases how to embed automated security checks (SAST, SCA, and Secrets Detection) into a React development workflow to catch vulnerabilities before they reach production.
 
+## Live Deployments
+
+* **Development Environment (Continuous Deployment):** [https://secure-react-pipeline-dev.vercel.app](https://secure-react-pipeline-dev.vercel.app)
+* **Production Environment (Manual Trigger):** [https://dorismond.fr](https://dorismond.fr) (also accessible at [https://samuel.dorismond.fr](https://samuel.dorismond.fr))
+
 ---
 
 ## Architecture and Workflow
