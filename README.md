@@ -53,10 +53,10 @@ graph TD
     D & E & F --> G{Critical Vulns Found?}
     G -->|Yes| H[Break the Build & Block PR]
     G -->|No| I[Lint + Jest + Playwright E2E]
-    I --> J[Deploy to Vercel]
+    I --> J[Vercel Git integration: preview per PR, production on main]
 ```
 
-The pipeline ([`.github/workflows/security-pipeline.yml`](.github/workflows/security-pipeline.yml)) runs, on every push and pull request: security scans → lint + unit tests (Jest) → end-to-end tests (Playwright) → deploy to the **development** Vercel project. Deployment to **production** (dorismond.fr) is a manual `workflow_dispatch` trigger.
+The pipeline ([`.github/workflows/security-pipeline.yml`](.github/workflows/security-pipeline.yml)) runs, on every push and pull request to `main`: security scans → lint + unit tests (Jest) → end-to-end tests (Playwright). **Deployment is handled by Vercel's native Git integration** — every pull request gets a preview deployment, and merges to `main` deploy to production ([dorismond.fr](https://dorismond.fr)).
 
 ---
 
@@ -103,11 +103,15 @@ Below are real findings detected and remediated using this pipeline:
 
 ## How to Set Up
 
-### 1. Secrets
-Add the required tokens under **Settings > Secrets and variables > Actions**: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID_DEV`, `VERCEL_PROJECT_ID_PROD`.
+### 1. Deployment (Vercel)
+Connect the repository in the [Vercel dashboard](https://vercel.com) (Import Project → this repo). Vercel then deploys automatically:
+* **Pull requests** → preview deployments
+* **`main`** → production ([dorismond.fr](https://dorismond.fr))
 
-### 2. Vercel
-Ensure the Vercel projects have their **Framework Preset** set to **Next.js**.
+Ensure the project's **Framework Preset** is set to **Next.js**. No Vercel tokens or IDs are needed in GitHub Actions.
+
+### 2. Security scans
+The scans run out of the box. Gitleaks uses the built-in `GITHUB_TOKEN`; no extra secrets are required.
 
 ---
 
