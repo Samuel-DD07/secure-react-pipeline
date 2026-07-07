@@ -1,0 +1,31 @@
+{
+  "slug": "yaka-eplace",
+  "category": "software",
+  "order": 14,
+  "date": "2025-06-01",
+  "title": "yaka ePlace - r/place temps réel",
+  "description": {
+    "fr": "Tableau collaboratif interactif de type r/place en temps réel, développé avec Node.js et WebSockets pour synchroniser les pixels entre tous les utilisateurs.",
+    "en": "Interactive collaborative r/place-style board in real time, built with Node.js and WebSockets to synchronize pixels across all users."
+  },
+  "tags": [
+    "Node.js",
+    "WebSockets",
+    "JavaScript",
+    "Temps réel"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

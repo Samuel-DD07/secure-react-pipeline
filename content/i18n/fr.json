@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "home": {
+    "ctaProjects": "Voir mes projets",
+    "ctaContact": "Me contacter",
+    "domainsTitle": "Domaines d'expertise",
+    "featuredTitle": "Projets phares",
+    "featuredSubtitle": "Une sélection de mes réalisations récentes.",
+    "seeAll": "Voir tous les projets"
+  },
+  "about": {
+    "title": "À propos",
+    "presentationTitle": "Présentation",
+    "experienceTitle": "Expérience",
+    "educationTitle": "Formation",
+    "skillsTitle": "Compétences",
+    "current": "Aujourd'hui"
+  },
+  "projects": {
+    "title": "Projets",
+    "intro": "Projets professionnels, académiques et personnels - du web à la cybersécurité, en passant par l'IA et le DevOps.",
+    "all": "Tous",
+    "empty": "Aucun projet dans cette catégorie."
+  },
+  "project": {
+    "descriptionTitle": "Description",
+    "hardSkillsTitle": "Compétences techniques",
+    "softSkillsTitle": "Compétences transverses",
+    "galleryTitle": "Images et rendus",
+    "view": "Voir le projet",
+    "back": "Retour aux projets"
+  },
+  "contact": {
+    "title": "Contactez-moi",
+    "intro": "Une question, un projet, une opportunité ? Retrouvez-moi sur ces réseaux."
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "builtWith": "Conçu avec Next.js et Tailwind CSS."
+  },
+  "categories": {
+    "web": "Web",
+    "cyber": "Cybersécurité",
+    "ai": "IA & MCP",
+    "devops": "Systèmes & DevOps",
+    "software": "Dev logiciel",
+    "web3": "Web3",
+    "games": "Jeux",
+    "academic": "Académique"
+  },
+  "theme": {
+    "toggle": "Changer de thème",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "lang": {
+    "switch": "Changer de langue"
+  }
+}

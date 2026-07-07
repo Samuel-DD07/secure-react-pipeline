@@ -1,0 +1,30 @@
+{
+  "slug": "unity-chess",
+  "category": "games",
+  "order": 19,
+  "date": "2025-12-01",
+  "title": "Unity Chess Game",
+  "description": {
+    "fr": "Jeu d'échecs développé sous Unity en C# : règles complètes, gestion des tours et interface 3D interactive.",
+    "en": "Chess game built in Unity with C#: full rules, turn management and an interactive 3D interface."
+  },
+  "tags": [
+    "Unity",
+    "C#",
+    "Game Dev"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

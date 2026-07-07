@@ -1,0 +1,35 @@
+{
+  "slug": "premier-lien",
+  "category": "web",
+  "order": 5,
+  "date": "2026-06-01",
+  "title": "Premier Lien",
+  "description": {
+    "fr": "Site web de l'association Premier Lien, dédiée à la santé et à la parentalité. Développé avec React et déployé sur Vercel.",
+    "en": "Website for the Premier Lien association, dedicated to health and parenting. Built with React and deployed on Vercel."
+  },
+  "tags": [
+    "React",
+    "Next.js",
+    "Vercel",
+    "Design"
+  ],
+  "link": "https://premier-lien.vercel.app/",
+  "softSkills": {
+    "fr": [
+      "Créativité",
+      "Communication",
+      "Gestion de projet",
+      "Design",
+      "Compréhension des besoins"
+    ],
+    "en": [
+      "Creativity",
+      "Communication",
+      "Project management",
+      "Design",
+      "Understanding needs"
+    ]
+  },
+  "cover": "/images/projets/premier-lien/cover.webp"
+}

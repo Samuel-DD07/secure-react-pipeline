@@ -1,0 +1,30 @@
+{
+  "slug": "movie-explorer",
+  "category": "software",
+  "order": 16,
+  "date": "2026-01-01",
+  "title": "MovieExplorer - Angular",
+  "description": {
+    "fr": "Application front-end d'exploration de films développée en Angular et TypeScript, avec recherche, filtres et fiches détaillées.",
+    "en": "Front-end movie-exploration app built with Angular and TypeScript, featuring search, filters and detailed cards."
+  },
+  "tags": [
+    "Angular",
+    "TypeScript",
+    "RxJS"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

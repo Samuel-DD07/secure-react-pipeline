@@ -19,9 +19,10 @@ module.exports = defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run start',
+    // Next.js needs a production build before `next start`.
+    command: 'npm run build && npm run start',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
-    timeout: 120000,
+    timeout: 180000,
   },
 });

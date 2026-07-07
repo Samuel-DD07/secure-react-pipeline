@@ -1,0 +1,33 @@
+{
+  "slug": "devops-amazon",
+  "category": "devops",
+  "order": 13,
+  "date": "2026-06-01",
+  "title": "devops-amazon - Déploiement DevSecOps AWS",
+  "description": {
+    "fr": "Déploiement DevSecOps complet sur AWS d'une application Next.js + Flask + PostgreSQL, avec pipelines GitLab CI/CD, provisionnement Ansible et bonnes pratiques de sécurité.",
+    "en": "Full DevSecOps deployment on AWS of a Next.js + Flask + PostgreSQL application, with GitLab CI/CD pipelines, Ansible provisioning and security best practices."
+  },
+  "tags": [
+    "Next.js",
+    "Flask",
+    "PostgreSQL",
+    "GitLab CI/CD",
+    "Ansible",
+    "AWS"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

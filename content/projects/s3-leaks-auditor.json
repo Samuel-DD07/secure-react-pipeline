@@ -1,0 +1,32 @@
+{
+  "slug": "s3-leaks-auditor",
+  "category": "cyber",
+  "order": 6,
+  "date": "2025-12-01",
+  "title": "S3 Leaks Auditor",
+  "description": {
+    "fr": "Outil d'audit de sécurité détectant les fuites et les mauvaises configurations de buckets Amazon S3, développé en Python dans le cadre du cursus EPITA.",
+    "en": "Security audit tool detecting leaks and misconfigurations in Amazon S3 buckets, built in Python as part of the EPITA curriculum."
+  },
+  "tags": [
+    "Python",
+    "AWS",
+    "S3",
+    "Sécurité Cloud"
+  ],
+  "repo": null,
+  "softSkills": {
+    "fr": [
+      "Analyse",
+      "Rigueur",
+      "Sécurité",
+      "Résolution de problèmes"
+    ],
+    "en": [
+      "Analysis",
+      "Rigor",
+      "Security",
+      "Problem solving"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "slug": "gamesearch",
+  "category": "software",
+  "order": 17,
+  "date": "2026-05-01",
+  "title": "GameSearch - Moteur de recherche de jeux",
+  "description": {
+    "fr": "Plateforme full-stack d'indexation et de recherche de jeux vidéo : backend d'indexation en Python (couvert par de nombreux tests) et interface web en Java/JavaScript.",
+    "en": "Full-stack platform for indexing and searching video games: a Python indexing backend (heavily tested) and a Java/JavaScript web interface."
+  },
+  "tags": [
+    "Python",
+    "Java",
+    "JavaScript",
+    "Recherche",
+    "Full-stack"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

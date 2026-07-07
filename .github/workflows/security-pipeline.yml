@@ -50,7 +50,7 @@ jobs:
           if-no-files-found: ignore
 
   unit-tests:
-    name: Jest Unit & Integration Tests
+    name: Lint & Jest Unit Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -64,6 +64,9 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
+
+      - name: Lint (next lint)
+        run: npm run lint
 
       - name: Run Jest Tests
         run: npm run test:ci

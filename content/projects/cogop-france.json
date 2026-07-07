@@ -1,0 +1,30 @@
+{
+  "slug": "cogop-france",
+  "category": "web",
+  "order": 5,
+  "date": "2025-06-01",
+  "title": "Cogop France",
+  "description": {
+    "fr": "Site web de l'Église de Dieu de la Prophétie de France (Cogop France) : présentation de l'organisation, des églises, des ministères, des associations et des actualités. Conçu et réalisé en freelance.",
+    "en": "Website for the Church of God of Prophecy France (Cogop France): presenting the organization, its churches, ministries, associations and news. Designed and built as a freelancer."
+  },
+  "tags": ["Web", "Design", "CMS", "UI/UX"],
+  "link": "https://cogopfrance-l7um66smdq.live-website.com",
+  "cover": "/images/projets/cogop-france/cover.webp",
+  "softSkills": {
+    "fr": [
+      "Créativité",
+      "Communication",
+      "Gestion de projet",
+      "Design",
+      "Compréhension des besoins"
+    ],
+    "en": [
+      "Creativity",
+      "Communication",
+      "Project management",
+      "Design",
+      "Understanding needs"
+    ]
+  }
+}

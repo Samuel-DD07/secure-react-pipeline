@@ -1,0 +1,41 @@
+{
+  "slug": "issho-partners",
+  "category": "web",
+  "order": 4,
+  "featured": true,
+  "date": "2024-06-01",
+  "title": "issho Partners",
+  "description": {
+    "fr": "Conception et refonte du site web d'issho Partners pour correspondre à la charte graphique de l'entreprise, avec une optimisation des performances.",
+    "en": "Design and redesign of the issho Partners website to match the company's brand guidelines, with performance optimization."
+  },
+  "tags": [
+    "WordPress",
+    "Elementor",
+    "Design",
+    "SEO"
+  ],
+  "link": "https://issho-partners.com/",
+  "cover": "/images/projets/issho-partners/cover.webp",
+  "images": [
+    "/images/projets/issho-partners/1.webp",
+    "/images/projets/issho-partners/2.webp",
+    "/images/projets/issho-partners/3.webp"
+  ],
+  "softSkills": {
+    "fr": [
+      "Créativité",
+      "Communication",
+      "Gestion de projet",
+      "Design",
+      "Compréhension des besoins"
+    ],
+    "en": [
+      "Creativity",
+      "Communication",
+      "Project management",
+      "Design",
+      "Understanding needs"
+    ]
+  }
+}

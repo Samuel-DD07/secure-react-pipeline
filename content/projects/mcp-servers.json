@@ -1,0 +1,31 @@
+{
+  "slug": "mcp-servers",
+  "category": "ai",
+  "order": 8,
+  "date": "2026-04-01",
+  "title": "Serveurs MCP - Things3 & Calendar Apple",
+  "description": {
+    "fr": "Développement de serveurs Model Context Protocol (MCP) connectant des assistants IA à Things 3 et au calendrier Apple, permettant de créer et gérer tâches et événements en langage naturel.",
+    "en": "Development of Model Context Protocol (MCP) servers connecting AI assistants to Things 3 and Apple Calendar, enabling natural-language creation and management of tasks and events."
+  },
+  "tags": [
+    "Node.js",
+    "MCP",
+    "LLM",
+    "API"
+  ],
+  "softSkills": {
+    "fr": [
+      "Innovation",
+      "Résolution de problèmes",
+      "Machine Learning",
+      "Esprit d'analyse"
+    ],
+    "en": [
+      "Innovation",
+      "Problem solving",
+      "Machine Learning",
+      "Analytical thinking"
+    ]
+  }
+}

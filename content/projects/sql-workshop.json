@@ -1,0 +1,29 @@
+{
+  "slug": "sql-workshop",
+  "category": "academic",
+  "order": 23,
+  "date": "2025-01-01",
+  "title": "Workshop SQL - EPITA",
+  "description": {
+    "fr": "Atelier approfondi de SQL : modélisation, requêtes complexes, jointures, agrégations et optimisation de bases de données relationnelles.",
+    "en": "In-depth SQL workshop: modeling, complex queries, joins, aggregations and relational database optimization."
+  },
+  "tags": [
+    "SQL",
+    "Bases de données"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

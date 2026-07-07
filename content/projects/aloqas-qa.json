@@ -1,0 +1,39 @@
+{
+  "slug": "aloqas-qa",
+  "category": "ai",
+  "order": 7,
+  "featured": true,
+  "date": "2024-05-03",
+  "title": "Aloqas - Chatbot IA Question Answering",
+  "description": {
+    "fr": "Chatbot d'IA de Question Answering comparant trois modèles (SqueezeBERT, BERT et DeBERTa), développé avec Python, TensorFlow, Hugging Face et Streamlit.",
+    "en": "Question Answering AI chatbot comparing three models (SqueezeBERT, BERT and DeBERTa), built with Python, TensorFlow, Hugging Face and Streamlit."
+  },
+  "tags": [
+    "Python",
+    "TensorFlow",
+    "Hugging Face",
+    "Streamlit",
+    "NLP"
+  ],
+  "link": "https://aloqas-aloqas-qa-streamlit.hf.space",
+  "cover": "/images/projets/aloqas-qa/cover.webp",
+  "images": [
+    "/images/projets/aloqas-qa/1.webp",
+    "/images/projets/aloqas-qa/2.webp"
+  ],
+  "softSkills": {
+    "fr": [
+      "Innovation",
+      "Résolution de problèmes",
+      "Machine Learning",
+      "Esprit d'analyse"
+    ],
+    "en": [
+      "Innovation",
+      "Problem solving",
+      "Machine Learning",
+      "Analytical thinking"
+    ]
+  }
+}

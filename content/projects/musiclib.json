@@ -1,0 +1,31 @@
+{
+  "slug": "musiclib",
+  "category": "academic",
+  "order": 25,
+  "date": "2026-04-01",
+  "title": "MusicLib - Bibliothèque musicale web",
+  "description": {
+    "fr": "Application web de bibliothèque musicale avec authentification et notifications par e-mail (PHPMailer), développée en PHP et Python.",
+    "en": "Music-library web application with authentication and email notifications (PHPMailer), built with PHP and Python."
+  },
+  "tags": [
+    "PHP",
+    "Python",
+    "MySQL",
+    "Web"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}
