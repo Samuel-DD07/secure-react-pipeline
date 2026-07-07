@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "home": {
+    "ctaProjects": "View my projects",
+    "ctaContact": "Contact me",
+    "domainsTitle": "Areas of expertise",
+    "featuredTitle": "Featured projects",
+    "featuredSubtitle": "A selection of my recent work.",
+    "seeAll": "View all projects"
+  },
+  "about": {
+    "title": "About",
+    "presentationTitle": "Introduction",
+    "experienceTitle": "Experience",
+    "educationTitle": "Education",
+    "skillsTitle": "Skills",
+    "current": "Present"
+  },
+  "projects": {
+    "title": "Projects",
+    "intro": "Professional, academic and personal projects - from web to cybersecurity, AI and DevOps.",
+    "all": "All",
+    "empty": "No project in this category."
+  },
+  "project": {
+    "descriptionTitle": "Description",
+    "hardSkillsTitle": "Hard skills",
+    "softSkillsTitle": "Soft skills",
+    "galleryTitle": "Screens and renders",
+    "view": "View project",
+    "back": "Back to projects"
+  },
+  "contact": {
+    "title": "Get in touch",
+    "intro": "A question, a project, an opportunity? Find me on these channels."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "Built with Next.js and Tailwind CSS."
+  },
+  "categories": {
+    "web": "Web",
+    "cyber": "Cybersecurity",
+    "ai": "AI & MCP",
+    "devops": "Systems & DevOps",
+    "software": "Software",
+    "web3": "Web3",
+    "games": "Games",
+    "academic": "Academic"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "lang": {
+    "switch": "Switch language"
+  }
+}

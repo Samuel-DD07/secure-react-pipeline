@@ -1,0 +1,31 @@
+{
+  "slug": "n8n",
+  "category": "academic",
+  "order": 27,
+  "date": "2026-04-01",
+  "title": "n8n - Workflows d'automatisation",
+  "description": {
+    "fr": "Création de pipelines ETL et de workflows d'automatisation avec n8n, notamment pour le nettoyage de bases de données hospitalières.",
+    "en": "Building ETL pipelines and automation workflows with n8n, notably for cleaning hospital databases."
+  },
+  "tags": [
+    "n8n",
+    "Node.js",
+    "ETL",
+    "Automatisation"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

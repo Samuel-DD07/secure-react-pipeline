@@ -1,0 +1,33 @@
+{
+  "slug": "ci-cd",
+  "category": "devops",
+  "order": 11,
+  "date": "2026-03-01",
+  "title": "Pipeline CI/CD complet",
+  "description": {
+    "fr": "Infrastructure DevOps complète : backend FastAPI, frontend React, déploiement local via Docker Compose et Kubernetes (Minikube), packaging Helm et intégration CI/CD GitHub Actions avec audit de sécurité (Bandit).",
+    "en": "Complete DevOps infrastructure: FastAPI backend, React frontend, local deployment via Docker Compose and Kubernetes (Minikube), Helm packaging and GitHub Actions CI/CD with security auditing (Bandit)."
+  },
+  "tags": [
+    "FastAPI",
+    "React",
+    "Kubernetes",
+    "Helm",
+    "GitHub Actions",
+    "Docker"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

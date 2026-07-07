@@ -1,0 +1,34 @@
+{
+  "slug": "noahlink",
+  "category": "web",
+  "order": 1,
+  "date": "2025-01-01",
+  "title": "NoahLink",
+  "description": {
+    "fr": "Conception et développement du site web NoahLink, réalisé dans le cadre de mon poste chez issho.",
+    "en": "Design and development of the NoahLink website, built during my role at issho."
+  },
+  "tags": [
+    "Web",
+    "JavaScript",
+    "UI/UX"
+  ],
+  "link": "https://noahlink.fr/",
+  "softSkills": {
+    "fr": [
+      "Créativité",
+      "Communication",
+      "Gestion de projet",
+      "Design",
+      "Compréhension des besoins"
+    ],
+    "en": [
+      "Creativity",
+      "Communication",
+      "Project management",
+      "Design",
+      "Understanding needs"
+    ]
+  },
+  "cover": "/images/projets/noahlink/cover.webp"
+}

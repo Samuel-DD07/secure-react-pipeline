@@ -1,0 +1,187 @@
+{
+  "name": "Samuel Dorismond",
+  "email": "samuel.dorismond@yahoo.com",
+  "linkedin": "https://www.linkedin.com/in/samuel-dorismond-a5798321b",
+  "github": "https://github.com/Samuel-DD07",
+  "photo": "/images/profile/samuel.webp",
+  "role": {
+    "fr": "Élève-ingénieur EPITA & Ingénieur Cybersécurité",
+    "en": "EPITA Engineering Student & Cybersecurity Engineer"
+  },
+  "shortBio": {
+    "fr": "Développement web, IA et DevOps - apprenti Ingénieur Cybersécurité chez Cyber Test Systems.",
+    "en": "Web development, AI and DevOps - Cybersecurity Engineering apprentice at Cyber Test Systems."
+  },
+  "longBio": {
+    "fr": [
+      "Élève-ingénieur en 4ᵉ année à l'EPITA, spécialisé en informatique et développement web, après un B.U.T. Informatique à l'IUT de Villetaneuse.",
+      "Actuellement apprenti Ingénieur en Cybersécurité chez Cyber Test Systems, où je contribue au développement des capacités de la plateforme Hybrid Cyber Range (CTS-HCR) et à des exercices cyber d'envergure internationale.",
+      "Passionné par le développement web, l'intelligence artificielle et le DevOps, j'aime concevoir des produits complets - du front-end au déploiement - et relever des défis technologiques ambitieux."
+    ],
+    "en": [
+      "Fourth-year engineering student at EPITA, specialized in computer science and web development, after a B.U.T. in Computer Science at IUT de Villetaneuse.",
+      "Currently a Cybersecurity Engineering apprentice at Cyber Test Systems, where I contribute to the development of the Hybrid Cyber Range platform (CTS-HCR) and to large-scale international cyber exercises.",
+      "Passionate about web development, artificial intelligence and DevOps, I love building complete products - from the front-end to deployment - and taking on ambitious technical challenges."
+    ]
+  },
+  "experience": [
+    {
+      "company": "Cyber Test Systems",
+      "role": {
+        "fr": "Apprenti Ingénieur Cybersécurité",
+        "en": "Cybersecurity Engineer (Apprentice)"
+      },
+      "period": {
+        "fr": "nov. 2024 - aujourd'hui",
+        "en": "Nov 2024 - Present"
+      },
+      "location": "France",
+      "current": true,
+      "description": {
+        "fr": "Contribution au développement des capacités du Cyber Range hybride (CTS-HCR). Conception d'un scénario complexe de Digital Forensics Investigation (DFI) pour le Thailand National Cyber Exercise 2024 (NCX24) - plus de 120 équipes réparties sur 7 secteurs d'infrastructures critiques.",
+        "en": "Contributing to the development of the Hybrid Cyber Range (CTS-HCR) capabilities. Designed a complex Digital Forensics Investigation (DFI) scenario for the Thailand National Cyber Exercise 2024 (NCX24) - 120+ teams across 7 critical-infrastructure sectors."
+      },
+      "highlight": {
+        "title": {
+          "fr": "Mission Thaïlande - NCX24",
+          "en": "Thailand mission - NCX24"
+        },
+        "photos": [
+          "/images/experience/thailand-1.webp",
+          "/images/experience/thailand-2.webp",
+          "/images/experience/rooftop-team.webp"
+        ]
+      }
+    },
+    {
+      "company": "issho",
+      "role": {
+        "fr": "Responsable développement web, puis Consultant",
+        "en": "Web Development Lead, then Consultant"
+      },
+      "period": {
+        "fr": "sept. 2022 - sept. 2024",
+        "en": "Sep 2022 - Sep 2024"
+      },
+      "location": "Paris",
+      "current": false,
+      "description": {
+        "fr": "Responsable du développement de la plateforme digitale d'issho (alternance), puis consultant en développement web (CDD). Projets menés chez issho : la plateforme Reset-Leadership et le site issho Partners. En parallèle, en freelance : conception et refonte de sites comme NoahLink et MonCocon by WE.",
+        "en": "Led the development of issho's digital platform (apprenticeship), then worked as a web development consultant (fixed-term). Projects at issho: the Reset-Leadership platform and the issho Partners website. In parallel, as a freelancer: design and redesign of websites such as NoahLink and MonCocon by WE."
+      }
+    }
+  ],
+  "education": [
+    {
+      "school": "EPITA - École d'Ingénieurs en Informatique",
+      "degree": {
+        "fr": "Diplôme d'ingénieur, Informatique",
+        "en": "Engineering degree, Computer Science"
+      },
+      "period": {
+        "fr": "2024 - 2027",
+        "en": "2024 - 2027"
+      }
+    },
+    {
+      "school": "IUT de Villetaneuse - Université Sorbonne Paris Nord",
+      "degree": {
+        "fr": "B.U.T. Informatique",
+        "en": "B.U.T. in Computer Science"
+      },
+      "period": {
+        "fr": "2021 - 2024",
+        "en": "2021 - 2024"
+      }
+    }
+  ],
+  "skills": [
+    {
+      "category": {
+        "fr": "Cybersécurité",
+        "en": "Cybersecurity"
+      },
+      "items": [
+        "Sécurité réseau",
+        "Digital Forensics",
+        "Cyber Range",
+        "Audit Cloud (AWS)",
+        "GNS3",
+        "Linux"
+      ]
+    },
+    {
+      "category": {
+        "fr": "Front-End",
+        "en": "Front-End"
+      },
+      "items": [
+        "React",
+        "Next.js",
+        "Angular",
+        "Vue.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Three.js"
+      ]
+    },
+    {
+      "category": {
+        "fr": "Back-End",
+        "en": "Back-End"
+      },
+      "items": [
+        "Node.js",
+        "Express",
+        "Python",
+        "FastAPI / Flask",
+        "PHP / Laravel",
+        "Java / Spring",
+        "C / C++",
+        "PostgreSQL",
+        "MongoDB"
+      ]
+    },
+    {
+      "category": {
+        "fr": "IA & Data",
+        "en": "AI & Data"
+      },
+      "items": [
+        "TensorFlow",
+        "Hugging Face",
+        "PyTorch",
+        "LLM / MCP",
+        "Pandas"
+      ]
+    },
+    {
+      "category": {
+        "fr": "DevOps & Cloud",
+        "en": "DevOps & Cloud"
+      },
+      "items": [
+        "Docker",
+        "Kubernetes / Helm",
+        "Terraform",
+        "AWS",
+        "Azure",
+        "CI/CD (GitHub, GitLab)",
+        "Ansible"
+      ]
+    },
+    {
+      "category": {
+        "fr": "Outils",
+        "en": "Tools"
+      },
+      "items": [
+        "Git",
+        "VS Code",
+        "Figma",
+        "Vercel",
+        "n8n"
+      ]
+    }
+  ]
+}

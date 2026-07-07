@@ -1,0 +1,43 @@
+{
+  "slug": "reset-leadership",
+  "category": "web",
+  "order": 3,
+  "featured": true,
+  "date": "2024-09-01",
+  "title": "Plateforme Reset-Leadership (LMS)",
+  "description": {
+    "fr": "Développement d'une plateforme complète de gestion de contenus, de formations (LMS) et d'outils de leadership, avec Laravel, React.js, Tailwind CSS, la Graph API, Azure et GitHub.",
+    "en": "Development of a complete platform for content management, training (LMS) and leadership tools, using Laravel, React.js, Tailwind CSS, the Graph API, Azure and GitHub."
+  },
+  "tags": [
+    "Laravel",
+    "React.js",
+    "Tailwind CSS",
+    "Graph API",
+    "Azure"
+  ],
+  "link": "https://reset-leadership.com/",
+  "cover": "/images/projets/reset-leadership/cover.webp",
+  "images": [
+    "/images/projets/reset-leadership/1.webp",
+    "/images/projets/reset-leadership/2.webp",
+    "/images/projets/reset-leadership/3.webp",
+    "/images/projets/reset-leadership/4.webp"
+  ],
+  "softSkills": {
+    "fr": [
+      "Leadership",
+      "Gestion de projet",
+      "Travail en équipe",
+      "Responsabilité",
+      "Résolution de problèmes"
+    ],
+    "en": [
+      "Leadership",
+      "Project management",
+      "Teamwork",
+      "Responsibility",
+      "Problem solving"
+    ]
+  }
+}

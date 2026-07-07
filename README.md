@@ -1,13 +1,41 @@
 # Secure React Pipeline
 
-A fully automated security pipeline for React applications, integrated directly into GitHub Actions.
+Personal portfolio of **Samuel Dorismond** ([dorismond.fr](https://dorismond.fr)) — a bilingual **Next.js** website shipped through a fully automated **DevSecOps pipeline** on GitHub Actions.
 
-This project showcases how to embed automated security checks (SAST, SCA, and Secrets Detection) into a React development workflow to catch vulnerabilities before they reach production.
+This project has two faces: a modern, SEO-optimized portfolio (the product), and a security-first CI/CD pipeline (the engineering showcase) that embeds automated security checks — SAST, SCA, and Secrets Detection — into the development workflow to catch vulnerabilities before they reach production.
 
 ## Live Deployments
 
-* **Development Environment (Continuous Deployment):** [https://secure-react-pipeline-dev.vercel.app](https://secure-react-pipeline-dev.vercel.app)
-* **Production Environment (Manual Trigger):** [https://dorismond.fr](https://dorismond.fr) (also accessible at [https://samuel.dorismond.fr](https://samuel.dorismond.fr))
+* **Development (Continuous Deployment):** [https://secure-react-pipeline-dev.vercel.app](https://secure-react-pipeline-dev.vercel.app)
+* **Production (Manual Trigger):** [https://dorismond.fr](https://dorismond.fr) (also at [https://samuel.dorismond.fr](https://samuel.dorismond.fr))
+
+---
+
+## The Website
+
+- **Framework:** Next.js 15 (App Router, JavaScript/JSX) — server rendering + static generation for excellent SEO
+- **i18n:** bilingual FR/EN with locale routing (`/fr`, `/en`) via `next-intl`, `hreflang` and per-page canonicals
+- **Styling:** Tailwind CSS, dark/light theme (`next-themes`), animated "tech" particle background
+- **Content as files (no backend):** everything lives in `content/` — edit a file + `git push` to update the site
+- **SEO:** metadata & Open Graph per page, `sitemap.xml`, `robots.txt`, JSON-LD (Person / CreativeWork)
+- **Images:** optimized to WebP via `next/image`
+- **Analytics:** `@vercel/analytics`
+
+### Run locally
+
+```bash
+npm install
+npm run dev        # http://localhost:3000
+```
+
+Other commands: `npm run build`, `npm run start`, `npm run lint`, `npm test` (Jest), `npm run test:e2e` (Playwright).
+
+### Update content (no code)
+
+- **Personal info** (bio, experience, education, skills): edit [`content/profile.json`](content/profile.json). Text fields are bilingual: `{ "fr": "…", "en": "…" }`.
+- **Add a project:** create `content/projects/<slug>.json` (copy an existing one). Fields: `slug`, `category` (`web` · `cyber` · `ai` · `devops` · `software` · `web3` · `games` · `academic`), `order`, `featured`, `date`, `title`, `description` (bilingual), `tags`, `softSkills` (bilingual), `link`, `cover`, `images`.
+- **Remove a project:** delete its JSON file. A project without a `cover` shows a stylized "code" card.
+- **UI strings:** [`content/i18n/fr.json`](content/i18n/fr.json) and [`content/i18n/en.json`](content/i18n/en.json).
 
 ---
 
@@ -24,8 +52,11 @@ graph TD
     C -->|Parallel Scan 3| F[OWASP Dependency-Check: SCA]
     D & E & F --> G{Critical Vulns Found?}
     G -->|Yes| H[Break the Build & Block PR]
-    G -->|No| I[Build Successful & Deploy]
+    G -->|No| I[Lint + Jest + Playwright E2E]
+    I --> J[Vercel Git integration: preview per PR, production on main]
 ```
+
+The pipeline ([`.github/workflows/security-pipeline.yml`](.github/workflows/security-pipeline.yml)) runs, on every push and pull request to `main`: security scans → lint + unit tests (Jest) → end-to-end tests (Playwright). **Deployment is handled by Vercel's native Git integration** — every pull request gets a preview deployment, and merges to `main` deploy to production ([dorismond.fr](https://dorismond.fr)).
 
 ---
 
@@ -35,7 +66,7 @@ Every push and pull request automatically triggers the following scans:
 
 | Scanner | Category | What it checks | Scope |
 |---|---|---|---|
-| **Semgrep** | **SAST** (Static Application Security Testing) | Vulnerability patterns in JS/TS (XSS, insecure DOM insertion, bad configurations) | React codebase |
+| **Semgrep** | **SAST** (Static Application Security Testing) | Vulnerability patterns in JS/TS (XSS, insecure DOM insertion, bad configurations) | React/Next.js codebase |
 | **OWASP Dependency-Check** | **SCA** (Software Composition Analysis) | Outdated or insecure packages and known CVEs in npm dependencies | `package.json` & `package-lock.json` |
 | **Gitleaks** | **Secrets Detection** | Hardcoded API keys, private keys, database credentials, and tokens | Full git history & commit diffs |
 
@@ -49,20 +80,18 @@ Security is only effective if it prevents bad code from shipping. This pipeline 
 * **Semgrep**: Fails the run if rules in the `Error` category (e.g. CSRF flaws, DOM-XSS) are triggered.
 * **SCA**: Flags builds containing high- or critical-severity CVEs.
 
-### Performance and Caching Optimizations
-Slow pipelines frustrate developers. This pipeline is optimized for speed:
-* **Database Caching**: The OWASP Dependency-Check CVE database is cached across runs using GitHub Actions cache, reducing scan times from 10 minutes to under 2 minutes.
-* **Incremental Scanning**: Gitleaks only scans the commit range of the Pull Request, preventing slow scans on larger repositories.
+### Quality Gates Before Deploy
+Deployment is gated behind **lint**, **Jest unit tests** and **Playwright end-to-end tests** — a build only ships if every gate is green.
 
-### Shift Left (Local Git Hooks)
-Catch security issues before they reach the remote repository:
-* Uses **Husky** and **lint-staged** to run Gitleaks locally on staged files prior to commit.
+### Performance and Caching Optimizations
+* **Incremental Scanning**: Gitleaks only scans the commit range of the Pull Request, preventing slow scans on larger repositories.
+* **Dependency caching**: npm caching across runs speeds up installs.
 
 ---
 
 ## Real-world Findings and Remediation
 
-Below are real findings detected and remediated using this pipeline on a test React application:
+Below are real findings detected and remediated using this pipeline:
 
 | Tool | Finding | Severity | Real-world Impact | Remediation |
 | :--- | :--- | :---: | :--- | :--- |
@@ -74,15 +103,16 @@ Below are real findings detected and remediated using this pipeline on a test Re
 
 ## How to Set Up
 
-### 1. Copy the Configuration
-Copy the workflow configuration file into your project:
-```bash
-cp .github/workflows/security.yml your-project/.github/workflows/
-```
+### 1. Deployment (Vercel)
+Connect the repository in the [Vercel dashboard](https://vercel.com) (Import Project → this repo). Vercel then deploys automatically:
+* **Pull requests** → preview deployments
+* **`main`** → production ([dorismond.fr](https://dorismond.fr))
 
-### 2. Configure GitHub Secrets
-Add any necessary tokens or environment variables to **Settings > Secrets and variables > Actions** in your repository.
+Ensure the project's **Framework Preset** is set to **Next.js**. No Vercel tokens or IDs are needed in GitHub Actions.
+
+### 2. Security scans
+The scans run out of the box. Gitleaks uses the built-in `GITHUB_TOKEN`; no extra secrets are required.
 
 ---
 
-Built by [Samuel Dorismond](https://www.dorismond.fr) — Freelance DevSecOps Engineer & Security Consultant
+Built by [Samuel Dorismond](https://www.dorismond.fr) — Engineering student at EPITA & Cybersecurity Engineering apprentice at Cyber Test Systems.

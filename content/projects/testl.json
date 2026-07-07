@@ -1,0 +1,31 @@
+{
+  "slug": "testl",
+  "category": "academic",
+  "order": 26,
+  "date": "2026-03-01",
+  "title": "Projet TESTL - QA & tests e2e",
+  "description": {
+    "fr": "Automatisation de scénarios de tests unitaires et de bout en bout (e2e) avec Selenium, dans une démarche qualité logicielle.",
+    "en": "Automation of unit and end-to-end (e2e) test scenarios with Selenium, as part of a software-quality approach."
+  },
+  "tags": [
+    "Selenium",
+    "QA",
+    "Tests",
+    "Python"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

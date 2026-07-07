@@ -1,0 +1,30 @@
+{
+  "slug": "yaka-cpp",
+  "category": "academic",
+  "order": 21,
+  "date": "2026-04-01",
+  "title": "Workshops C++ - EPITA (ING2)",
+  "description": {
+    "fr": "Ateliers et examen de C++ avancé à l'EPITA : design patterns, gestion de la mémoire, templates et programmation orientée objet moderne.",
+    "en": "Advanced C++ workshops and exam at EPITA: design patterns, memory management, templates and modern object-oriented programming."
+  },
+  "tags": [
+    "C++",
+    "Design Patterns",
+    "OOP"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

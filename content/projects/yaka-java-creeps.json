@@ -1,0 +1,30 @@
+{
+  "slug": "yaka-java-creeps",
+  "category": "academic",
+  "order": 22,
+  "date": "2025-02-01",
+  "title": "Yaka Creeps - IA de jeu (Java)",
+  "description": {
+    "fr": "Développement d'une intelligence artificielle de jeu (Creeps) en Java, avec stratégies de déplacement et prise de décision.",
+    "en": "Development of a game AI (Creeps) in Java, with movement strategies and decision-making."
+  },
+  "tags": [
+    "Java",
+    "IA",
+    "Algorithmique"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}

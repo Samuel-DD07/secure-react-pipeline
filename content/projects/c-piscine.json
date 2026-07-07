@@ -1,0 +1,30 @@
+{
+  "slug": "c-piscine",
+  "category": "academic",
+  "order": 20,
+  "date": "2024-11-01",
+  "title": "Piscine C - EPITA",
+  "description": {
+    "fr": "Piscine intensive de programmation en C à l'EPITA : manipulation de la mémoire, chaînes, structures de données et algorithmique bas niveau (plus de 100 exercices).",
+    "en": "Intensive C programming bootcamp at EPITA: memory manipulation, strings, data structures and low-level algorithmics (100+ exercises)."
+  },
+  "tags": [
+    "C",
+    "Algorithmique",
+    "Systèmes"
+  ],
+  "softSkills": {
+    "fr": [
+      "Résolution de problèmes",
+      "Rigueur",
+      "Autonomie",
+      "Travail en équipe"
+    ],
+    "en": [
+      "Problem solving",
+      "Rigor",
+      "Autonomy",
+      "Teamwork"
+    ]
+  }
+}
