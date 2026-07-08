@@ -5,15 +5,14 @@ import { useTheme } from "next-themes";
 
 /**
  * Animated "motherboard" background: PCB-style traces, pads and lots of
- * multi-color pulsing LEDs. Data signals stream in from the edges and flow
- * naturally toward the cursor (velocity steering with inertia — smooth curves,
- * no jitter). Each signal has a random speed, size, trail length and a small
- * target offset so the motion feels organic. Falls back to the viewport center
- * when there is no cursor.
+ * multi-color pulsing LEDs. Data signals travel in clean right-angle segments
+ * (up/down/left/right) toward the cursor — like traces on a board — then orbit
+ * the cursor for ~10s and fade out. Each click spawns a burst of 10 signals
+ * from the page edges (spam-friendly, capped for performance).
  *
  * Performance-minded: DPR pinned to 1, ~30fps throttle, static trace layer
- * pre-rendered to an offscreen canvas and blitted, pre-baked additive glow
- * sprites, fewer elements on small screens, pauses when unfocused.
+ * pre-rendered to an offscreen canvas, pre-baked additive glow sprites, fewer
+ * elements on small screens, pauses when unfocused.
  */
 export default function TechBackground() {
   const canvasRef = useRef(null);
@@ -37,30 +36,31 @@ export default function TechBackground() {
     const TRACE = isDark ? "rgba(139,92,246,0.16)" : "rgba(99,102,241,0.13)";
     const PAD = isDark ? "rgba(167,139,250,0.5)" : "rgba(99,102,241,0.4)";
     const ACCENT = isDark ? "139,92,246" : "99,102,241";
-    const LED_COLORS = [
-      "#8B5CF6",
-      "#6366F1",
-      "#8B5CF6",
-      "#22D3EE",
-      "#34D399",
-      "#F472B6",
-      "#FBBF24",
-    ];
+    const LED_COLORS = ["#8B5CF6", "#6366F1", "#8B5CF6", "#22D3EE", "#34D399", "#F472B6", "#FBBF24"];
     const SIGNAL_COLORS = ["#A78BFA", "#22D3EE", "#818CF8", "#34D399", "#F472B6"];
     const glowAlpha = isDark ? 1 : 0.72;
 
+    const ORBIT_ENTER = 26;
+    const ORBIT_DUR = 10;
+    const FADE_DUR = 0.8;
+
     let width = 0;
     let height = 0;
+    let small = false;
     let wires = [];
     let leds = [];
     let signals = [];
     let staticCanvas = null;
     let raf = 0;
     let last = 0;
+    let CAP = 300;
+    let baseCount = 28;
     const t0 = performance.now();
     const FRAME_MS = 1000 / 30;
 
     const mouse = { x: -9999, y: -9999, on: false };
+    const targetXY = () =>
+      mouse.on ? { x: mouse.x, y: mouse.y } : { x: width * 0.5, y: height * 0.45 };
 
     const glowCache = new Map();
     function glow(color, size) {
@@ -89,28 +89,53 @@ export default function TechBackground() {
       if (s < 0.75) return { x: -12, y: Math.random() * height };
       return { x: width + 12, y: Math.random() * height };
     }
-    function spawnSignal(sg) {
+
+    // Pick the next straight leg (commit to one axis toward the target) so the
+    // path is made of clean right angles with no per-frame 1px toggling.
+    function newLeg(sg) {
+      const T = targetXY();
+      const gx = T.x + sg.ox;
+      const gy = T.y + sg.oy;
+      const dx = gx - sg.x;
+      const dy = gy - sg.y;
+      let axis;
+      if (Math.abs(dx) < 2) axis = "y";
+      else if (Math.abs(dy) < 2) axis = "x";
+      else if (Math.random() < 0.6) axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+      else axis = Math.random() < 0.5 ? "x" : "y";
+      const rem = axis === "x" ? dx : dy;
+      const legMax = 40 * (1 + ((Math.random() * 3) | 0)); // 40..160px
+      const len = Math.sign(rem) * Math.min(Math.abs(rem), legMax);
+      sg.axis = axis;
+      sg.legEndX = axis === "x" ? sg.x + len : sg.x;
+      sg.legEndY = axis === "y" ? sg.y + len : sg.y;
+    }
+
+    function spawnTravel(sg) {
       const p = edgePoint();
       sg.x = p.x;
       sg.y = p.y;
-      // random speed
-      sg.speed = 55 + Math.random() * 185;
-      // initial heading roughly inward, with a random angular spread
-      const ang =
-        Math.atan2(height / 2 - p.y, width / 2 - p.x) +
-        (Math.random() - 0.5) * 0.9;
-      sg.vx = Math.cos(ang) * sg.speed;
-      sg.vy = Math.sin(ang) * sg.speed;
-      // random style
+      sg.mode = "travel";
+      sg.speed = 90 + Math.random() * 220; // random speed
       sg.color = SIGNAL_COLORS[(Math.random() * SIGNAL_COLORS.length) | 0];
-      sg.size = 9 + Math.random() * 13;
-      sg.trailLen = 6 + ((Math.random() * 13) | 0);
+      sg.size = 9 + Math.random() * 13; // random size
+      sg.trailLen = 8 + ((Math.random() * 16) | 0); // random style
       sg.lineW = 1 + Math.random() * 1.5;
-      // small per-signal target offset so they don't funnel to one exact pixel
-      sg.ox = (Math.random() - 0.5) * 16;
-      sg.oy = (Math.random() - 0.5) * 16;
-      sg.life = 0;
+      sg.ox = (Math.random() - 0.5) * 20;
+      sg.oy = (Math.random() - 0.5) * 20;
       sg.trail = [];
+      newLeg(sg);
+    }
+
+    function enterOrbit(sg) {
+      const T = targetXY();
+      sg.mode = "orbit";
+      sg.orbitT = 0;
+      sg.orbitAng = Math.atan2(sg.y - T.y, sg.x - T.x);
+      sg.orbitR = Math.max(16, Math.min(48, Math.hypot(sg.x - T.x, sg.y - T.y)));
+      sg.orbitDir = Math.random() < 0.5 ? 1 : -1;
+      sg.orbitSpd = 1.4 + Math.random() * 1.8;
+      sg.fadeT = 0;
     }
 
     function makePath(a, b) {
@@ -122,11 +147,9 @@ export default function TechBackground() {
         ? [a, { x: b.x - dirX * ch, y: a.y }, { x: b.x, y: a.y + dirY * ch }, b]
         : [a, { x: a.x, y: b.y - dirY * ch }, { x: a.x + dirX * ch, y: b.y }, b];
     }
-
     function addLed(x, y) {
       leds.push({
-        x,
-        y,
+        x, y,
         color: LED_COLORS[(Math.random() * LED_COLORS.length) | 0],
         phase: Math.random() * Math.PI * 2,
         speed: 0.8 + Math.random() * 2,
@@ -139,14 +162,16 @@ export default function TechBackground() {
       height = canvas.clientHeight;
       canvas.width = width;
       canvas.height = height;
+      small = width < 768;
+      CAP = small ? 110 : 300;
+      baseCount = small ? 12 : 28;
 
-      const small = width < 768;
       const grid = small ? 38 : 44;
       const cols = Math.max(2, Math.floor(width / grid));
       const rows = Math.max(2, Math.floor(height / grid));
-      const ox = (width - (cols - 1) * grid) / 2;
-      const oy = (height - (rows - 1) * grid) / 2;
-      const node = (c, r) => ({ x: ox + c * grid, y: oy + r * grid });
+      const oxg = (width - (cols - 1) * grid) / 2;
+      const oyg = (height - (rows - 1) * grid) / 2;
+      const node = (c, r) => ({ x: oxg + c * grid, y: oyg + r * grid });
 
       const nWires = Math.min(small ? 34 : 80, Math.floor((width * height) / 10000));
       wires = [];
@@ -164,22 +189,20 @@ export default function TechBackground() {
         wires.push(makePath(a, b));
         padPts.push(a, b);
       }
-
       for (const p of padPts) if (Math.random() < 0.82) addLed(p.x, p.y);
       const extra = small ? 18 : 46;
-      for (let i = 0; i < extra; i++) {
-        addLed(node((Math.random() * cols) | 0, (Math.random() * rows) | 0));
-      }
+      for (let i = 0; i < extra; i++) addLed(node((Math.random() * cols) | 0, (Math.random() * rows) | 0));
 
-      const nSig = Math.min(small ? 26 : 78, Math.floor((width * height) / 14000));
-      signals = Array.from({ length: nSig }, () => {
-        const sg = {};
-        spawnSignal(sg);
-        // stagger start positions across the field
+      // ambient signals (continuously replenished)
+      signals = [];
+      for (let i = 0; i < baseCount; i++) {
+        const sg = { ambient: true };
+        spawnTravel(sg);
         sg.x = Math.random() * width;
         sg.y = Math.random() * height;
-        return sg;
-      });
+        newLeg(sg);
+        signals.push(sg);
+      }
 
       staticCanvas = document.createElement("canvas");
       staticCanvas.width = width;
@@ -204,22 +227,65 @@ export default function TechBackground() {
       }
     }
 
+    function updateSignal(sg, dt) {
+      const T = targetXY();
+      if (sg.mode === "travel") {
+        // enter orbit before reaching the cursor (kills any 1px jitter)
+        if (Math.hypot(T.x + sg.ox - sg.x, T.y + sg.oy - sg.y) <= ORBIT_ENTER) {
+          enterOrbit(sg);
+        } else {
+          const step = sg.speed * dt;
+          if (sg.axis === "x") {
+            const rem = sg.legEndX - sg.x;
+            if (Math.abs(rem) <= step) {
+              sg.x = sg.legEndX;
+              newLeg(sg);
+            } else sg.x += Math.sign(rem) * step;
+          } else {
+            const rem = sg.legEndY - sg.y;
+            if (Math.abs(rem) <= step) {
+              sg.y = sg.legEndY;
+              newLeg(sg);
+            } else sg.y += Math.sign(rem) * step;
+          }
+        }
+      } else {
+        // orbit + fade (follows the moving cursor)
+        sg.orbitT += dt;
+        sg.orbitAng += sg.orbitDir * sg.orbitSpd * dt;
+        sg.x = T.x + Math.cos(sg.orbitAng) * sg.orbitR;
+        sg.y = T.y + Math.sin(sg.orbitAng) * sg.orbitR;
+        if (sg.mode === "orbit" && sg.orbitT >= ORBIT_DUR) sg.mode = "fade";
+        if (sg.mode === "fade") {
+          sg.fadeT += dt;
+          if (sg.fadeT >= FADE_DUR) {
+            if (sg.ambient) {
+              spawnTravel(sg);
+              return 1;
+            }
+            return 0; // transient -> remove
+          }
+        }
+      }
+      sg.trail.push({ x: sg.x, y: sg.y });
+      if (sg.trail.length > sg.trailLen) sg.trail.shift();
+      return 1;
+    }
+
     function render(now) {
       const time = (now - t0) / 1000;
       const dt = FRAME_MS / 1000;
       ctx.clearRect(0, 0, width, height);
       if (staticCanvas) ctx.drawImage(staticCanvas, 0, 0);
 
-      const tx = mouse.on ? mouse.x : width * 0.5;
-      const ty = mouse.on ? mouse.y : height * 0.45;
-
+      const T = targetXY();
       ctx.globalCompositeOperation = "lighter";
 
-      // LEDs (pulse + proximity to cursor)
+      // LEDs
       for (const l of leds) {
         let b = 0.5 + 0.5 * Math.sin(time * l.speed + l.phase);
-        const dx = l.x - tx;
-        const dy = l.y - ty;
+        const dx = l.x - T.x;
+        const dy = l.y - T.y;
         const d2 = dx * dx + dy * dy;
         if (d2 < 190 * 190) b += (1 - Math.sqrt(d2) / 190) * 1.5;
         const size = l.size * (2.3 + b * 2.6);
@@ -227,30 +293,15 @@ export default function TechBackground() {
         ctx.drawImage(glow(l.color, 48), l.x - size / 2, l.y - size / 2, size, size);
       }
 
-      // Signals flowing toward the cursor (smooth velocity steering)
+      // Signals
+      const survivors = [];
       for (const sg of signals) {
-        const dx = tx + sg.ox - sg.x;
-        const dy = ty + sg.oy - sg.y;
-        const dist = Math.hypot(dx, dy) || 1;
-        sg.life += dt;
-        // Respawn just before arrival (prevents any jitter at the cursor).
-        if (dist < 16 || sg.life > 9) {
-          spawnSignal(sg);
-          continue;
-        }
-        const ux = dx / dist;
-        const uy = dy / dist;
-        // Inertia -> gentle natural curve toward the target, no staircase.
-        sg.vx += (ux * sg.speed - sg.vx) * 0.05;
-        sg.vy += (uy * sg.speed - sg.vy) * 0.05;
-        sg.x += sg.vx * dt;
-        sg.y += sg.vy * dt;
-
-        sg.trail.push({ x: sg.x, y: sg.y });
-        if (sg.trail.length > sg.trailLen) sg.trail.shift();
-
+        const keep = updateSignal(sg, dt);
+        if (!keep) continue;
+        const fadeMul =
+          sg.mode === "fade" ? Math.max(0, 1 - sg.fadeT / FADE_DUR) : 1;
         if (sg.trail.length > 1) {
-          ctx.globalAlpha = 0.38 * glowAlpha;
+          ctx.globalAlpha = 0.4 * glowAlpha * fadeMul;
           ctx.strokeStyle = sg.color;
           ctx.lineWidth = sg.lineW;
           ctx.beginPath();
@@ -258,11 +309,13 @@ export default function TechBackground() {
           for (let i = 1; i < sg.trail.length; i++) ctx.lineTo(sg.trail[i].x, sg.trail[i].y);
           ctx.stroke();
         }
-        ctx.globalAlpha = 0.85 * glowAlpha;
+        ctx.globalAlpha = 0.85 * glowAlpha * fadeMul;
         ctx.drawImage(glow(sg.color, 36), sg.x - sg.size / 2, sg.y - sg.size / 2, sg.size, sg.size);
+        survivors.push(sg);
       }
+      signals = survivors;
 
-      // Subtle focal glow at the cursor (no CPU chip)
+      // subtle focal glow at the cursor (no CPU chip)
       if (mouse.on) {
         ctx.globalAlpha = 0.3 * glowAlpha;
         ctx.drawImage(glow(`rgba(${ACCENT},0.9)`, 180), mouse.x - 55, mouse.y - 55, 110, 110);
@@ -270,6 +323,15 @@ export default function TechBackground() {
 
       ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = "source-over";
+    }
+
+    function spawnBurst(n) {
+      for (let i = 0; i < n; i++) {
+        if (signals.length >= CAP) break;
+        const sg = { ambient: false };
+        spawnTravel(sg);
+        signals.push(sg);
+      }
     }
 
     function loop(now) {
@@ -298,15 +360,15 @@ export default function TechBackground() {
       mouse.y = e.clientY;
       mouse.on = true;
     }
-    function onLeave() {
-      mouse.on = false;
+    function onDown() {
+      spawnBurst(10);
     }
 
     build();
     start();
     window.addEventListener("resize", build);
-    window.addEventListener("mousemove", onMove, { passive: true });
-    window.addEventListener("mouseout", onLeave);
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerdown", onDown, { passive: true });
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("blur", pause);
     window.addEventListener("focus", resume);
@@ -314,8 +376,8 @@ export default function TechBackground() {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", build);
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseout", onLeave);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerdown", onDown);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("blur", pause);
       window.removeEventListener("focus", resume);
