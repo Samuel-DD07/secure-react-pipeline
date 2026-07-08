@@ -41,8 +41,8 @@ export default function TechBackground() {
     const glowAlpha = isDark ? 1 : 0.72;
 
     const ORBIT_ENTER = 26;
-    const ORBIT_DUR = 10;
-    const FADE_DUR = 0.8;
+    const ORBIT_DUR = 1;
+    const FADE_DUR = 0.6;
 
     let width = 0;
     let height = 0;
@@ -116,10 +116,10 @@ export default function TechBackground() {
       sg.x = p.x;
       sg.y = p.y;
       sg.mode = "travel";
-      sg.speed = 90 + Math.random() * 220; // random speed
+      sg.speed = 150 + Math.random() * 230; // random speed
       sg.color = SIGNAL_COLORS[(Math.random() * SIGNAL_COLORS.length) | 0];
       sg.size = 9 + Math.random() * 13; // random size
-      sg.trailLen = 8 + ((Math.random() * 16) | 0); // random style
+      sg.trailLen = 6 + ((Math.random() * 8) | 0); // random style
       sg.lineW = 1 + Math.random() * 1.5;
       sg.ox = (Math.random() - 0.5) * 20;
       sg.oy = (Math.random() - 0.5) * 20;
@@ -163,8 +163,8 @@ export default function TechBackground() {
       canvas.width = width;
       canvas.height = height;
       small = width < 768;
-      CAP = small ? 110 : 300;
-      baseCount = small ? 12 : 28;
+      CAP = small ? 55 : 120;
+      baseCount = small ? 7 : 14;
 
       const grid = small ? 38 : 44;
       const cols = Math.max(2, Math.floor(width / grid));
@@ -173,7 +173,7 @@ export default function TechBackground() {
       const oyg = (height - (rows - 1) * grid) / 2;
       const node = (c, r) => ({ x: oxg + c * grid, y: oyg + r * grid });
 
-      const nWires = Math.min(small ? 34 : 80, Math.floor((width * height) / 10000));
+      const nWires = Math.min(small ? 24 : 56, Math.floor((width * height) / 12000));
       wires = [];
       leds = [];
       const padPts = [];
@@ -189,8 +189,8 @@ export default function TechBackground() {
         wires.push(makePath(a, b));
         padPts.push(a, b);
       }
-      for (const p of padPts) if (Math.random() < 0.82) addLed(p.x, p.y);
-      const extra = small ? 18 : 46;
+      for (const p of padPts) if (Math.random() < 0.4) addLed(p.x, p.y);
+      const extra = small ? 6 : 14;
       for (let i = 0; i < extra; i++) addLed(node((Math.random() * cols) | 0, (Math.random() * rows) | 0));
 
       // ambient signals (continuously replenished)
