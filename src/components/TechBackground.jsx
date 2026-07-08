@@ -5,15 +5,18 @@ import { useTheme } from "next-themes";
 
 /**
  * Subtle animated "tech" background: a slowly drifting particle network
- * (constellation) drawn on a fixed full-viewport canvas behind all content.
- * Theme-aware, pauses when the tab is hidden, respects reduced motion.
+ * drawn on a fixed full-viewport canvas behind all content.
+ *
+ * Performance-minded: device pixel ratio pinned to 1 (the field is soft, so
+ * retina resolution is wasted work), throttled to ~30fps, squared-distance
+ * checks in the O(n^2) link loop, fewer particles on small screens, and it
+ * pauses when the tab/window is not in focus.
  */
 export default function TechBackground() {
   const canvasRef = useRef(null);
   const { resolvedTheme } = useTheme();
   const [visible, setVisible] = useState(false);
 
-  // Fade the background in gradually once the page has mounted.
   useEffect(() => {
     const id = requestAnimationFrame(() => setVisible(true));
     return () => cancelAnimationFrame(id);
@@ -28,38 +31,42 @@ export default function TechBackground() {
     ).matches;
 
     const isDark = resolvedTheme !== "light";
-    // Accent violet/indigo; a touch stronger on light backgrounds.
     const rgb = isDark ? "139, 92, 246" : "99, 102, 241";
     const lineAlpha = isDark ? 0.35 : 0.22;
     const dotAlpha = isDark ? 0.9 : 0.6;
-    const dotRadius = 2.1;
+    const dotRadius = 2;
 
     let width = 0;
     let height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
     let particles = [];
     let raf = 0;
+    let last = 0;
 
-    const LINK_DIST = 165;
+    const FRAME_MS = 1000 / 30; // throttle to ~30fps
+    let LINK_DIST = 140;
+    let LINK_DIST_SQ = LINK_DIST * LINK_DIST;
 
     function resize() {
       width = canvas.clientWidth;
       height = canvas.clientHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // DPR pinned to 1 on purpose (huge perf win on retina/4K screens).
+      canvas.width = width;
+      canvas.height = height;
 
-      const count = Math.min(150, Math.floor((width * height) / 11000));
+      const small = width < 768;
+      LINK_DIST = small ? 120 : 140;
+      LINK_DIST_SQ = LINK_DIST * LINK_DIST;
+      const cap = small ? 34 : 80;
+      const count = Math.min(cap, Math.floor((width * height) / 16000));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
       }));
     }
 
-    function draw() {
+    function render() {
       ctx.clearRect(0, 0, width, height);
 
       for (const p of particles) {
@@ -71,18 +78,18 @@ export default function TechBackground() {
         else if (p.y > height) p.y -= height;
       }
 
-      // Links
+      // Links (squared-distance check; sqrt only when actually drawing)
+      ctx.lineWidth = 1;
       for (let i = 0; i < particles.length; i++) {
+        const a = particles[i];
         for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i];
           const b = particles[j];
           const dx = a.x - b.x;
           const dy = a.y - b.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < LINK_DIST) {
-            const alpha = (1 - dist / LINK_DIST) * lineAlpha;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < LINK_DIST_SQ) {
+            const alpha = (1 - Math.sqrt(d2) / LINK_DIST) * lineAlpha;
             ctx.strokeStyle = `rgba(${rgb}, ${alpha})`;
-            ctx.lineWidth = 1.1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -91,37 +98,26 @@ export default function TechBackground() {
         }
       }
 
-      // Dots
       ctx.fillStyle = `rgba(${rgb}, ${dotAlpha})`;
       for (const p of particles) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, dotRadius, 0, Math.PI * 2);
         ctx.fill();
       }
-
-      raf = requestAnimationFrame(draw);
     }
 
-    function drawStatic() {
-      // Reduced motion: render one static frame.
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = `rgba(${rgb}, ${dotAlpha})`;
-      for (const p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, dotRadius, 0, Math.PI * 2);
-        ctx.fill();
-      }
+    function loop(t) {
+      raf = requestAnimationFrame(loop);
+      if (t - last < FRAME_MS) return;
+      last = t;
+      render();
     }
 
     function start() {
       cancelAnimationFrame(raf);
-      if (reduce) drawStatic();
-      else raf = requestAnimationFrame(draw);
+      if (reduce) render();
+      else raf = requestAnimationFrame(loop);
     }
-
-    // Pause the animation whenever the visitor leaves the site:
-    // switching tab / minimizing (visibilitychange) or focusing another
-    // window (blur). Resume only when back and visible.
     function pause() {
       cancelAnimationFrame(raf);
     }
