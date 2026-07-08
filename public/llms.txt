@@ -1,0 +1,17 @@
+# Samuel Dorismond — Portfolio
+
+> Personal portfolio of Samuel Dorismond: EPITA engineering student and Cybersecurity Engineering apprentice at Cyber Test Systems. A bilingual (FR/EN) site showcasing projects across web development, cybersecurity, AI/MCP and DevOps. Built with Next.js.
+
+## Pages
+- [Home](https://dorismond.fr/en): Introduction, role and featured projects.
+- [About](https://dorismond.fr/en/about): Biography, professional experience, education and skills.
+- [Projects](https://dorismond.fr/en/projets): All projects, filterable by category (Web, Cybersecurity, AI & MCP, DevOps, Software, Games, Academic).
+- [Contact](https://dorismond.fr/en/contact): Email, LinkedIn and GitHub.
+
+## About
+Samuel Dorismond is a fourth-year engineering student at EPITA and a Cybersecurity Engineering apprentice at Cyber Test Systems (since Nov 2024), where he contributed to the Hybrid Cyber Range (CTS-HCR) and the Thailand National Cyber Exercise 2024. He previously led web development at issho (2022-2024). Skills span web development (React, Next.js, Angular), cybersecurity, AI/LLM/MCP, and DevOps/cloud.
+
+## Contact
+- Email: samuel.dorismond@yahoo.com
+- LinkedIn: https://www.linkedin.com/in/samuel-dorismond-a5798321b
+- GitHub: https://github.com/Samuel-DD07
